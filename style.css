@@ -1,6 +1,6 @@
 #display
 {
-    min-height:100px;
+    height:100px;
     font-size:90px;
     text-align: right;
     position:relative;
@@ -8,6 +8,7 @@
     width:92vmin;
     background-color: black;
     color:white;
+    overflow-y:scroll;
 }
 #calcBody
 {
@@ -29,4 +30,17 @@ button[data-action="equals"]
 #calcBody
 {   position:relative;
     margin:auto;
+}
+#history
+{
+    font-size:0.3em;
+    font-style:italic;
+    color:grey;
+}
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(236, 65, 65, 0.5);
 }

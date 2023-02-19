@@ -1,6 +1,19 @@
 const btns = document.querySelectorAll("button");
-const display = document.getElementById("display");
+const display = document.getElementById("displayNum");
 const calculator = document.getElementById("calculator");
+let history=[]
+function updateHistory()
+{
+const historyElement=document.getElementById("history")
+while(historyElement.hasChildNodes())
+historyElement.removeChild(historyElement.children[0])
+  for(let i=0;i<history.length;i++)
+  {
+    let prevCalc=document.createElement("div");
+    prevCalc.innerText=history[i];
+    historyElement.appendChild(prevCalc);
+  }
+}
 btns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const op = e.target.dataset.action;
@@ -44,23 +57,32 @@ btns.forEach((btn) => {
   });
 });
 function calculate(f, o, s) {
+
   f = parseFloat(f);
   s = parseFloat(s);
-  console.log(f,o,s)
-  let res=0;
+  let res=0,op=null;
   switch (o) {
     case "add":
       res=f + s;
+      op="+"
       break;
     case "minus":
       res=f - s;
+      op="-"
       break;
     case "mul":
       res=f * s;
+      op="*"
       break;
     case "div":
       res=f / s;
+      op="/"
       break;
   }
+  if(history.length==3)
+  history.pop()
+  if(history[0]!=`${f} ${op} ${s} = ${res}`)
+  history.unshift(`${f} ${op} ${s} = ${res}`)
+  updateHistory();
   return res;
 }
